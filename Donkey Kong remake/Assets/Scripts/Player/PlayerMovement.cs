@@ -15,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask ladderLayers;
     [SerializeField] private Transform ladderCheckUp;
     [SerializeField] private Transform ladderCheckDown;
+    [Header("Points")]
+    [SerializeField] private float pointsTimer;
+    [SerializeField] private float pointsTimerMax = 1;
+    [SerializeField] private Vector3 boxPosition;
+    [SerializeField] private Vector3 boxOffset;
 
     private Rigidbody2D rigidBody;
 
@@ -61,6 +66,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
+
+        CheckBarrel();
+
+        if (pointsTimer < pointsTimerMax)
+            pointsTimer += Time.deltaTime * 1;
     }
 
     private void Movement()
@@ -124,5 +134,24 @@ public class PlayerMovement : MonoBehaviour
                 print(IsGrounded());
             }
         }
+    }
+
+    private void CheckBarrel()
+    {
+        RaycastHit2D[] Raycasts = Physics2D.BoxCastAll(transform.position + boxPosition, boxOffset, 0, Vector2.zero, 0);
+        foreach (RaycastHit2D collider in Raycasts)
+        {
+            if (collider.transform.CompareTag("Enemy") && pointsTimer >= pointsTimerMax)
+            {
+                pointsTimer = 0f;
+                //Points giver
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawCube(transform.position + boxPosition, boxOffset);
     }
 }
