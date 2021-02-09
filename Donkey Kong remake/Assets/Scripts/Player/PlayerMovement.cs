@@ -40,12 +40,12 @@ public class PlayerMovement : MonoBehaviour
         if (type == true)
         {
             castPosition = ladderCheckUp.position;
-            castSize = new Vector3(1f, 1f, 1f);
+            castSize = new Vector3(0.1f, 1f, 0.1f);
         }
         else if (type == false)
         {
             castPosition = ladderCheckDown.position;
-            castSize = new Vector3(0.3f, 0.3f, 0.3f);
+            castSize = new Vector3(0.1f, 0.3f, 0.1f);
         }
 
         RaycastHit2D[] Raycasts2 = Physics2D.BoxCastAll(castPosition, castSize, 0, Vector2.zero, 0);
@@ -147,11 +147,5 @@ public class PlayerMovement : MonoBehaviour
                 //Points giver
             }
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawCube(transform.position + boxPosition, boxOffset);
     }
 }
