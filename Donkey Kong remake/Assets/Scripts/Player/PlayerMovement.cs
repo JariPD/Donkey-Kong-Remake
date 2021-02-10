@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,17 +21,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 boxPosition;
     [SerializeField] private Vector3 boxOffset;
 
-    //score
-    public static int ScoreValue = 0;
-    Text CurrentScore;
-
-
     private Rigidbody2D rigidBody;
 
     void Start()
     {
         rigidBody = transform.GetComponent<Rigidbody2D>();
-        CurrentScore = GetComponent<Text>();
     }
 
     public bool IsGrounded()
@@ -43,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform CheckLadder(bool type)
     {
         Vector3 castPosition = transform.position;
-        Vector3 castSize = new Vector3(0.1f, 0.1f, 0.1f);
+        Vector3 castSize = new Vector3(0.1f,0.1f,0.1f);
         if (type == true)
         {
             castPosition = ladderCheckUp.position;
@@ -73,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
+        LadderMovement();
 
         CheckBarrel();
 
@@ -85,19 +79,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Movement()
+    private void LadderMovement()
     {
+        if (onLadder == false && !IsGrounded())
+            if (CheckLadder(true) != null && CheckLadder(false) != null)
+                return;
+
+
         if (Input.GetKey(KeyCode.W))
         {
             if (CheckLadder(true) != null)
             {
-                Vector3 playerPos = transform.position;
-                Transform ladder = CheckLadder(true);
                 if (onLadder == false)
                     onLadder = true;
 
+                Vector3 playerPos = transform.position;
+                Transform ladder = CheckLadder(true);
+
                 rigidBody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-                transform.position = new Vector3(ladder.position.x, playerPos.y + 0.002f, playerPos.z);
+                transform.position = new Vector3(ladder.position.x, playerPos.y + Time.deltaTime * 1f, playerPos.z);
             }
             else
             {
@@ -109,13 +109,14 @@ public class PlayerMovement : MonoBehaviour
         {
             if (CheckLadder(false) != null)
             {
-                Vector3 playerPos = transform.position;
-                Transform ladder = CheckLadder(false);
                 if (onLadder == false)
                     onLadder = true;
 
+                Vector3 playerPos = transform.position;
+                Transform ladder = CheckLadder(false);
+                
                 rigidBody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-                transform.position = new Vector3(ladder.position.x, playerPos.y - 0.002f, playerPos.z);
+                transform.position = new Vector3(ladder.position.x, playerPos.y - Time.deltaTime * 1f, playerPos.z);
             }
             else
             {
@@ -123,27 +124,24 @@ public class PlayerMovement : MonoBehaviour
                 rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
         }
+    }
 
-
+    private void Movement()
+    {
         if (Input.GetKey(KeyCode.D) && onLadder == false)
         {
-            transform.position = new Vector3(transform.position.x + (speed / 100), transform.position.y);
+            transform.position = new Vector3(transform.position.x + Time.deltaTime * speed, transform.position.y);
         }
         else if (Input.GetKey(KeyCode.A) && onLadder == false)
         {
-            transform.position = new Vector3(transform.position.x - (speed / 100), transform.position.y);
+            transform.position = new Vector3(transform.position.x - Time.deltaTime * speed, transform.position.y);
         }
 
         if (Input.GetKey(KeyCode.Space) && onLadder == false)
         {
             if (IsGrounded())
             {
-                print("Hot");
                 rigidBody.velocity = Vector2.up * jumpForce;
-            }
-            else
-            {
-                print(IsGrounded());
             }
         }
     }
@@ -157,7 +155,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 pointsTimer = 0f;
                 //Points giver
-                CurrentScore.text = "CurrentScore:" + ScoreValue;
             }
         }
     }
