@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,11 +22,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 boxPosition;
     [SerializeField] private Vector3 boxOffset;
 
+    //score
+    public static int ScoreValue = 0;
+    Text CurrentScore;
+
+
     private Rigidbody2D rigidBody;
 
     void Start()
     {
         rigidBody = transform.GetComponent<Rigidbody2D>();
+        CurrentScore = GetComponent<Text>();
     }
 
     public bool IsGrounded()
@@ -36,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform CheckLadder(bool type)
     {
         Vector3 castPosition = transform.position;
-        Vector3 castSize = new Vector3(0.1f,0.1f,0.1f);
+        Vector3 castSize = new Vector3(0.1f, 0.1f, 0.1f);
         if (type == true)
         {
             castPosition = ladderCheckUp.position;
@@ -150,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 pointsTimer = 0f;
                 //Points giver
+                CurrentScore.text = "CurrentScore:" + ScoreValue;
             }
         }
     }
