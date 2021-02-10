@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Pickup : MonoBehaviour
 {
-    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
-
+            Destroy(gameObject);
         }
     }
 }
