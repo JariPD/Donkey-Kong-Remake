@@ -4,19 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
-{
-    
-    public int ScoreValue = 0;
-
+{    
+    private int scoreValue = 0;
     [SerializeField] Text scoreText;
 
-    void Start()
+    private void Start()
     {
-        
+        PointAdder(0);
     }
 
-    void Update()
+    public void PointAdder(int value)
     {
-        scoreText.text = "CurrentScore:" + ScoreValue;
+        scoreValue += value;
+        scoreText.text = "CurrentScore:" + scoreValue;
     }
 }
