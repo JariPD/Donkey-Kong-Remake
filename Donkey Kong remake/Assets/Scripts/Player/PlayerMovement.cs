@@ -21,18 +21,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float pointsTimerMax = 1;
     [SerializeField] private Vector3 boxPosition;
     [SerializeField] private Vector3 boxOffset;
-
-    //score
-    public static int ScoreValue = 0;
-    Text CurrentScore;
-
+    [SerializeField] private Text text;
 
     private Rigidbody2D rigidBody;
+
+    Score score;
 
     void Start()
     {
         rigidBody = transform.GetComponent<Rigidbody2D>();
-        CurrentScore = GetComponent<Text>();
+        score = text.GetComponent<Score>();
     }
 
     public bool IsGrounded()
@@ -157,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 pointsTimer = 0f;
                 //Points giver
-                CurrentScore.text = "CurrentScore:" + ScoreValue;
+                 //+= 100;
             }
         }
     }
