@@ -135,7 +135,19 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5387879851160656517, guid: 6ac9f72523936874cb210b7414bf4b92, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1464050665}
+    - target: {fileID: 5387879851160656517, guid: 6ac9f72523936874cb210b7414bf4b92, type: 3}
+      propertyPath: myObject
+      value: 
+      objectReference: {fileID: 1464050663}
+    - target: {fileID: 5387879851160656517, guid: 6ac9f72523936874cb210b7414bf4b92, type: 3}
       propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1464050665}
+    - target: {fileID: 5387879851160656517, guid: 6ac9f72523936874cb210b7414bf4b92, type: 3}
+      propertyPath: currentScore
       value: 
       objectReference: {fileID: 1464050665}
     - target: {fileID: 5387879851160656518, guid: 6ac9f72523936874cb210b7414bf4b92, type: 3}
@@ -600,6 +612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647953352}
   - component: {fileID: 647953351}
+  - component: {fileID: 647953353}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -636,6 +649,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &647953353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647953350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a08990f31eb27842bd0b97f47fea4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1464050665}
 --- !u!1 &670782815
 GameObject:
   m_ObjectHideFlags: 0

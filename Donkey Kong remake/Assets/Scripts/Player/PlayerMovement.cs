@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float pointsTimerMax = 1;
     [SerializeField] private Vector3 boxPosition;
     [SerializeField] private Vector3 boxOffset;
-    [SerializeField] private Score score;
+
+    private Score score;
 
     private Rigidbody2D rigidBody;
 
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rigidBody = transform.GetComponent<Rigidbody2D>();
+        score = FindObjectOfType<Score>();
     }
 
     public bool IsGrounded()
@@ -157,8 +159,7 @@ public class PlayerMovement : MonoBehaviour
             if (collider.transform.CompareTag("Enemy") && pointsTimer >= pointsTimerMax)
             {
                 pointsTimer = 0f;
-                //Points giver
-                score.ScoreValue += 1;
+                score.PointAdder(100);   
             }
         }
     }
