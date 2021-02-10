@@ -71,6 +71,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (pointsTimer < pointsTimerMax)
             pointsTimer += Time.deltaTime * 1;
+
+        if (transform.position.x < -8.4f)
+        {
+            transform.position = new Vector3(-8.4f, transform.position.y, transform.position.z);
+        }
     }
 
     private void Movement()
