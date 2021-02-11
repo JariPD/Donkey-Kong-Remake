@@ -12,7 +12,7 @@ public class MainHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    protected void ChangeHealth(float amount)
+    public void ChangeHealth(float amount)
     {
         currentHealth += amount;
         CheckHealth();
