@@ -639,6 +639,7 @@ MonoBehaviour:
   enemyObject: {fileID: 2192361444696646223, guid: eaf41a42d23376845a2303400f692aff, type: 3}
   secondsBetweenSpawn: 6
   elapsedTime: 0
+  barrelList: []
 --- !u!4 &647953352
 Transform:
   m_ObjectHideFlags: 0
@@ -1433,6 +1434,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464050663}
   m_CullTransparentMesh: 1
+--- !u!1 &1797195153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5387879851160656514, guid: 6ac9f72523936874cb210b7414bf4b92, type: 3}
+  m_PrefabInstance: {fileID: 109073398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1797195159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797195153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32026d17e00acf47b0cb446223e6a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 0
 --- !u!1 &1847778461
 GameObject:
   m_ObjectHideFlags: 0

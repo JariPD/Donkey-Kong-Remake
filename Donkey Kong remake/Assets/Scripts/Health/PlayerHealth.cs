@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class PlayerHealth : MainHealth
 {
+    //PlayerAnim playerAnim;
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+        //playerAnim = GetComponent<PlayerAnim>();
+    }
+
+
     private void CheckHealth()
     {
         if (currentHealth <= 0)
@@ -27,6 +38,14 @@ public class PlayerHealth : MainHealth
             ChangeHealth(-1f);
         }
     }
+
+    private void Kill()
+    {
+        base.Kill();
+
+       // playerAnim.TriggerDeathAnimation();
+    }
+
     public float GetMaxHealth()
     {
         return maxHealth;
