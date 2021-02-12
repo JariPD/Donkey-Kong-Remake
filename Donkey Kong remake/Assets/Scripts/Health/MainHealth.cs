@@ -7,7 +7,7 @@ public class MainHealth : MonoBehaviour
     [SerializeField] protected float maxHealth = 3;
     [SerializeField] protected float currentHealth;
 
-    private void Start()
+    protected virtual void Start()
     {
         currentHealth = maxHealth;
     }
@@ -20,6 +20,8 @@ public class MainHealth : MonoBehaviour
 
     private void CheckHealth()
     {
+        Debug.Log("CheckHealth");
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;

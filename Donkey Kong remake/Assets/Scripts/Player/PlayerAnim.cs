@@ -13,7 +13,7 @@ public enum PlayerState
 
 public class PlayerAnim : MonoBehaviour
 {
-    [SerializeField] private PlayerState playerState;
+    /*[SerializeField] private PlayerState playerState;
     
     private PlayerMovement playerMovement;
 
@@ -25,23 +25,26 @@ public class PlayerAnim : MonoBehaviour
 
     void Update()
     {
-        
+        if (playerState == PlayerState.dead && Input.GetKeyDown(KeyCode.Q))
+        {
+            ResetState();
+        }
     }
 
     public void TriggerDeathAnimation()//zet playerstate op dead als je geen hartjes meer heb
     {
         playerState = PlayerState.dead;
-        GetComponent<BoxCollider2D>().enabled = false;
+        //GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
         GetComponent<BarrelSpawner>().enabled = false;
     }
 
-    private void ResetState()//reset zodat je niet voor altijd dood bent
+    public void ResetState()//reset zodat je niet voor altijd dood bent
     {
         playerState = PlayerState.idle;
-        GetComponent<BoxCollider2D>().enabled = true;
+        //GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<PlayerHealth>().ChangeHealth(3);
         GetComponent<PlayerMovement>().enabled = true;
         GetComponent<BarrelSpawner>().enabled = false;
-    }
+    }*/
 }
