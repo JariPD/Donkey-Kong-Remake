@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class MainHealth : MonoBehaviour
 {
-    [SerializeField] protected float maxHealth = 3;
-    [SerializeField] protected float currentHealth;
+    [SerializeField] protected int maxHealth = 3;
+    [SerializeField] protected int currentHealth;
+
+    private Lives lives;
 
     protected virtual void Start()
     {
         currentHealth = maxHealth;
+
+        lives = FindObjectOfType<Lives>();
     }
 
-    public void ChangeHealth(float amount)
+    public void ChangeHealth(int amount)
     {
         currentHealth += amount;
         CheckHealth();
@@ -20,7 +24,11 @@ public class MainHealth : MonoBehaviour
 
     private void CheckHealth()
     {
-        Debug.Log("CheckHealth");
+        if (lives != null)
+        {
+            lives.ChangeSprite(currentHealth);
+        }
+
 
         if (currentHealth <= 0)
         {

@@ -35,7 +35,7 @@ public class PlayerHealth : MainHealth
         {
             print("collision");
 
-            ChangeHealth(-1f);
+            ChangeHealth(-1);
         }
     }
 
