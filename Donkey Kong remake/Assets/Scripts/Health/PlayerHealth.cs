@@ -26,7 +26,8 @@ public class PlayerHealth : MainHealth
 
             ChangeHealth(-1f);
         }
-    }
+    }  
+
     public float GetMaxHealth()
     {
         return maxHealth;

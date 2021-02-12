@@ -8,7 +8,7 @@ public class BarrelSpawner : MonoBehaviour
     public float secondsBetweenSpawn;
     public float elapsedTime = 0.0f;
 
-    private List<GameObject> barrelList = new List<GameObject>();
+    public List<GameObject> barrelList = new List<GameObject>();
 
     void Update()
     {
@@ -27,10 +27,20 @@ public class BarrelSpawner : MonoBehaviour
 
         for (int i = 0; i < barrelList.Count; i++)
         {
-            if (barrelList[i].transform.position.x < -10)
+            if (barrelList[i] == null)
             {
-                Destroy(barrelList[i]);
                 barrelList.RemoveAt(i);
+
+                i -= 1;
+            }
+            else if (barrelList[i].transform.position.x < -10)
+            {
+                GameObject barrel = barrelList[i];
+                barrelList.RemoveAt(i);
+
+                Destroy(barrelList[i]);
+
+                i -= 1;
             }
         }
     }
