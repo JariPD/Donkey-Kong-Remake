@@ -6,6 +6,7 @@ public class MainHealth : MonoBehaviour
 {
     [SerializeField] protected int maxHealth = 3;
     [SerializeField] protected int currentHealth;
+    PlayerAnim playerAnim;
 
     private Lives lives;
 
@@ -22,7 +23,7 @@ public class MainHealth : MonoBehaviour
         CheckHealth();
     }
 
-    private void CheckHealth()
+    public void CheckHealth()
     {
         if (lives != null)
         {
@@ -40,8 +41,11 @@ public class MainHealth : MonoBehaviour
             currentHealth = maxHealth;
         }
     }
+
     public void Kill()
     {
-        transform.gameObject.SetActive(false);
+        print("Nice");
+        playerAnim.TriggerDeathAnimation();
+        //transform.gameObject.SetActive(false);
     }
 }
