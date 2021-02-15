@@ -64,10 +64,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     return collide.transform;
                 }
-                else
-                {
-                    print(collide.transform.tag);
-                }
             }
         }
         return null;
@@ -94,8 +90,6 @@ public class PlayerMovement : MonoBehaviour
         if (onLadder == false && !IsGrounded())
             if (CheckLadder(true) != null /*&& CheckLadder(false) != null*/)
                 return;
-
-        print(CheckLadder(true));
 
         if (Input.GetKey(KeyCode.W))
         {
