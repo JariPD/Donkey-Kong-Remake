@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float pointsTimerMax = 1;
     [SerializeField] private Vector3 boxPosition;
     [SerializeField] private Vector3 boxOffset;
+    private List<GameObject> usedBarrels = new List<GameObject>();
 
     private Score score;
 
@@ -63,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
                 {
                     return collide.transform;
                 }
+                else
+                {
+                    print(collide.transform.tag);
+                }
             }
         }
         return null;
@@ -87,9 +92,10 @@ public class PlayerMovement : MonoBehaviour
     private void LadderMovement()
     {
         if (onLadder == false && !IsGrounded())
-            if (CheckLadder(true) != null && CheckLadder(false) != null)
+            if (CheckLadder(true) != null /*&& CheckLadder(false) != null*/)
                 return;
 
+        print(CheckLadder(true));
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -156,8 +162,16 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D[] Raycasts = Physics2D.BoxCastAll(transform.position + boxPosition, boxOffset, 0, Vector2.zero, 0);
         foreach (RaycastHit2D collider in Raycasts)
         {
+            for (int i = 0; i < usedBarrels.Count; i++)
+                if (usedBarrels[i] == collider.transform.gameObject) 
+                { 
+                    print("Found"); 
+                    return; 
+                }
+
             if (collider.transform.CompareTag("Enemy") && pointsTimer >= pointsTimerMax)
             {
+                usedBarrels.Add(collider.transform.gameObject);
                 pointsTimer = 0f;
                 score.PointAdder(100);   
             }

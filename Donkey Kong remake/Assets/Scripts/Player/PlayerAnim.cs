@@ -13,7 +13,7 @@ public enum PlayerState
 
 public class PlayerAnim : MonoBehaviour
 {
-    /*[SerializeField] private PlayerState playerState;
+    [SerializeField] private PlayerState playerState;
     
     private PlayerMovement playerMovement;
 
@@ -46,5 +46,5 @@ public class PlayerAnim : MonoBehaviour
         GetComponent<PlayerHealth>().ChangeHealth(3);
         GetComponent<PlayerMovement>().enabled = true;
         GetComponent<BarrelSpawner>().enabled = false;
-    }*/
+    }
 }

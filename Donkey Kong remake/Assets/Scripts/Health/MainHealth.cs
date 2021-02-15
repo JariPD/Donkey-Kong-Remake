@@ -42,6 +42,6 @@ public class MainHealth : MonoBehaviour
     }
     public void Kill()
     {
-
+        transform.gameObject.SetActive(false);
     }
 }
