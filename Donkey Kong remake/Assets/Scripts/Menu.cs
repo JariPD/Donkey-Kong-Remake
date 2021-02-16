@@ -15,4 +15,13 @@ public class Menu : MonoBehaviour
         Application.Quit();
         Debug.Log("you quit");
     }
+
+    public void RestartGame()
+    {
+        if (true)
+        {
+            SceneManager.LoadScene("MainScene");
+        }
+    }
+
 }
