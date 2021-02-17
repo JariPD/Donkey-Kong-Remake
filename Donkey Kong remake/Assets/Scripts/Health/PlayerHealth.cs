@@ -6,7 +6,6 @@ public class PlayerHealth : MainHealth
 {
     //PlayerAnim playerAnim;
 
-
     protected override void Start()
     {
         base.Start();
@@ -14,19 +13,9 @@ public class PlayerHealth : MainHealth
         //playerAnim = GetComponent<PlayerAnim>();
     }
 
-
-    private void CheckHealth()
+    private void Update()
     {
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            Kill();
-        }
-
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+        CheckHealth();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,13 +26,6 @@ public class PlayerHealth : MainHealth
 
             ChangeHealth(-1);
         }
-    }
-
-    private void Kill()
-    {
-        base.Kill();
-
-       // playerAnim.TriggerDeathAnimation();
     }
 
     public float GetMaxHealth()
