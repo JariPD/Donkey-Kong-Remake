@@ -17,7 +17,6 @@ public class BarrelSpawner : MonoBehaviour
         if (elapsedTime > secondsBetweenSpawn)
         {
             elapsedTime = 0;
-            Debug.Log(true);
 
             Vector3 spawnPosition = new Vector3(-7.22f, 4.93f, 0f);
             GameObject newEnemy = (GameObject)Instantiate(enemyObject, spawnPosition, Quaternion.Euler(0, 0, 0));
@@ -35,10 +34,8 @@ public class BarrelSpawner : MonoBehaviour
             }
             else if (barrelList[i].transform.position.x < -10)
             {
-                GameObject barrel = barrelList[i];
-                barrelList.RemoveAt(i);
-
                 Destroy(barrelList[i]);
+                barrelList.RemoveAt(i);
 
                 i -= 1;
             }

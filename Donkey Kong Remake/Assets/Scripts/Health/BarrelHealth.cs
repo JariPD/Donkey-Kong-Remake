@@ -10,7 +10,7 @@ public class BarrelHealth : MainHealth
         {
             print("collision with Player");
 
-            ChangeHealth(-3f);
+            ChangeHealth(-3);
 
             Destroy(gameObject);
         }
