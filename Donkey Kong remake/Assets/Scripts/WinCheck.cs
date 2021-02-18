@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class WinCheck : MonoBehaviour
 {
-   
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player"))
         {
             print("You win :D");
             SceneManager.LoadScene("WinScreen", LoadSceneMode.Additive);

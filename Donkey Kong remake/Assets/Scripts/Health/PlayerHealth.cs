@@ -13,18 +13,14 @@ public class PlayerHealth : MainHealth
         //playerAnim = GetComponent<PlayerAnim>();
     }
 
-    private void Update()
-    {
-        CheckHealth();
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && transform.GetComponent<PlayerMovement>().hammerTime <= 0)
         {
             print("collision");
 
             ChangeHealth(-1);
+            transform.position = new Vector3(-7.27f, -3.62f, 0);
         }
     }
 

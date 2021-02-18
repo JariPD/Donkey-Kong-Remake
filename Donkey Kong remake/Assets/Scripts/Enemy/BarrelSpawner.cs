@@ -16,6 +16,7 @@ public class BarrelSpawner : MonoBehaviour
 
         if (elapsedTime > secondsBetweenSpawn)
         {
+
             elapsedTime = 0;
 
             Vector3 spawnPosition = new Vector3(-7.22f, 4.93f, 0f);
