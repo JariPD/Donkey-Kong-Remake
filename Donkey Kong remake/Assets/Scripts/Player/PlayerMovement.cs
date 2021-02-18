@@ -88,10 +88,10 @@ public class PlayerMovement : MonoBehaviour
         if (pointsTimer < pointsTimerMax)
             pointsTimer += Time.deltaTime * 1;
 
-        if (transform.position.x < -8.4f)
+       /* if (transform.position.x < -8.4f)
         {
             transform.position = new Vector3(-8.4f, transform.position.y, transform.position.z);
-        }
+        }*/
 
         if (!IsGrounded() && CheckLadder(true) == null)
             SetAnimation(6);
@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
             for (int i = 0; i < usedBarrels.Count; i++)
                 if (usedBarrels[i] == collider.transform.gameObject)
                 {
-                    print("Found");
+                    //print("Found");
                     return;
                 }
 
@@ -235,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (CheckLadder(true) != null)
                 animator.SetInteger("StateValue", 5);
-            print("ok");
+            //print("ok");
             return;
         }
 

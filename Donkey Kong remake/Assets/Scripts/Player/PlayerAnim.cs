@@ -10,6 +10,11 @@ public enum PlayerState
     dead = 4
 }     
 
+public enum LookDir
+{
+    right,
+    left
+}
 
 public class PlayerAnim : MonoBehaviour
 {

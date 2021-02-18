@@ -22,7 +22,7 @@ public class SnakeSpawner : MonoBehaviour
         {
             currentTime = 0;
             Vector3 spawnPosition = new Vector3(-7.22f, 4.93f, 0f);
-            GameObject newSnake = Instantiate(snake, new Vector3(-9.25f,-4.55f,0), Quaternion.Euler(0, 0, 0));
+            GameObject newSnake = Instantiate(snake, new Vector3(-10,-6.5f,0), Quaternion.Euler(0, 0, 0));
             snakes.Add(newSnake);
         }
     }
