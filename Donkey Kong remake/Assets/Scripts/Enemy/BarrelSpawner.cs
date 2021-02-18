@@ -19,7 +19,7 @@ public class BarrelSpawner : MonoBehaviour
 
             elapsedTime = 0;
 
-            Vector3 spawnPosition = new Vector3(-7.22f, 4.93f, 0f);
+            Vector3 spawnPosition = new Vector3(7f, 5f, 0f);
             GameObject newEnemy = (GameObject)Instantiate(enemyObject, spawnPosition, Quaternion.Euler(0, 0, 0));
 
             barrelList.Add(newEnemy);
@@ -33,7 +33,7 @@ public class BarrelSpawner : MonoBehaviour
 
                 i -= 1;
             }
-            else if (barrelList[i].transform.position.x < -10)
+            else if (barrelList[i].transform.position.x < -20)
             {
                 Destroy(barrelList[i]);
                 barrelList.RemoveAt(i);
