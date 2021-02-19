@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainHealth : MonoBehaviour
 {
@@ -44,8 +45,6 @@ public class MainHealth : MonoBehaviour
 
     public void Kill()
     {
-        print("Nice");
-        playerAnim.TriggerDeathAnimation();
-        //transform.gameObject.SetActive(false);
+        
     }
 }

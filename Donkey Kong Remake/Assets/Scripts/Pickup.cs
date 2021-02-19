@@ -10,6 +10,7 @@ public class Pickup : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<PlayerMovement>().hammerTime = 10;
             Destroy(gameObject);
         }
     }

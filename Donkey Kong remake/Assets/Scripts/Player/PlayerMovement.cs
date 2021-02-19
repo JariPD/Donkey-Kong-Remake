@@ -23,6 +23,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 boxOffset;
     private List<GameObject> usedBarrels = new List<GameObject>();
 
+    [Header("Racket")]
+    [SerializeField] public float hammerTime = 0;
+
+    [Header("Animations")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private float ladderFlipTime = 0.25f;
+    [SerializeField] private float currentLadderFlipTime = 0.25f;
+
     private Score score;
 
     private Rigidbody2D rigidBody;
@@ -30,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         rigidBody = transform.GetComponent<Rigidbody2D>();
         score = FindObjectOfType<Score>();
     }
@@ -42,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform CheckLadder(bool type)
     {
         Vector3 castPosition = transform.position;
-        Vector3 castSize = new Vector3(0.1f,0.1f,0.1f);
+        Vector3 castSize = new Vector3(0.1f, 0.1f, 0.1f);
         if (type == true)
         {
             castPosition = ladderCheckUp.position;
@@ -73,16 +82,19 @@ public class PlayerMovement : MonoBehaviour
     {
         Movement();
         LadderMovement();
-
         CheckBarrel();
+        RacketTime();
 
         if (pointsTimer < pointsTimerMax)
             pointsTimer += Time.deltaTime * 1;
 
-        if (transform.position.x < -8.4f)
+       /* if (transform.position.x < -8.4f)
         {
             transform.position = new Vector3(-8.4f, transform.position.y, transform.position.z);
-        }
+        }*/
+
+        if (!IsGrounded() && CheckLadder(true) == null)
+            SetAnimation(6);
     }
 
     private void LadderMovement()
@@ -91,8 +103,12 @@ public class PlayerMovement : MonoBehaviour
             if (CheckLadder(true) != null /*&& CheckLadder(false) != null*/)
                 return;
 
+        if (hammerTime > 0)
+            return;
+
         if (Input.GetKey(KeyCode.W))
         {
+            SetAnimation(5);
             if (CheckLadder(true) != null)
             {
                 if (onLadder == false)
@@ -112,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
+            SetAnimation(5);
             if (CheckLadder(false) != null)
             {
                 if (onLadder == false)
@@ -119,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
 
                 Vector3 playerPos = transform.position;
                 Transform ladder = CheckLadder(false);
-                
+
                 rigidBody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                 transform.position = new Vector3(ladder.position.x, playerPos.y - Time.deltaTime * 1f, playerPos.z);
             }
@@ -135,12 +152,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D) && onLadder == false)
         {
+            SetAnimation(1);
+            transform.eulerAngles = new Vector3(0, 180, 0);
             transform.position = new Vector3(transform.position.x + Time.deltaTime * speed, transform.position.y);
         }
         else if (Input.GetKey(KeyCode.A) && onLadder == false)
         {
+            SetAnimation(1);
+            transform.eulerAngles = new Vector3(0, 0, 0);
             transform.position = new Vector3(transform.position.x - Time.deltaTime * speed, transform.position.y);
         }
+
+        if (hammerTime > 0)
+            return;
 
         if (Input.GetKey(KeyCode.Space) && onLadder == false)
         {
@@ -149,6 +173,9 @@ public class PlayerMovement : MonoBehaviour
                 rigidBody.velocity = Vector2.up * jumpForce;
             }
         }
+
+        if (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+            SetAnimation(0);
     }
 
     private void CheckBarrel()
@@ -157,18 +184,62 @@ public class PlayerMovement : MonoBehaviour
         foreach (RaycastHit2D collider in Raycasts)
         {
             for (int i = 0; i < usedBarrels.Count; i++)
-                if (usedBarrels[i] == collider.transform.gameObject) 
-                { 
-                    print("Found"); 
-                    return; 
+                if (usedBarrels[i] == collider.transform.gameObject)
+                {
+                    //print("Found");
+                    return;
                 }
 
             if (collider.transform.CompareTag("Enemy") && pointsTimer >= pointsTimerMax)
             {
                 usedBarrels.Add(collider.transform.gameObject);
                 pointsTimer = 0f;
-                score.PointAdder(100);   
+                score.PointAdder(100);
             }
         }
+    }
+
+    private void RacketTime()
+    {
+        if (hammerTime > 0)
+        {
+            hammerTime -= Time.deltaTime;
+
+        }
+        else if (hammerTime < 0)
+        {
+            hammerTime = 0;
+        }
+    }
+
+    private void SetAnimation(int Value)
+    {
+        if (hammerTime > 0)
+        {
+            animator.SetInteger("StateValue", 4);
+            return;
+        }
+        else if (Value == 5 && CheckLadder(true) != null)
+        {
+
+            animator.SetInteger("StateValue", 5);
+            currentLadderFlipTime -= Time.deltaTime;
+            if (currentLadderFlipTime <= 0)
+            {
+                transform.Rotate(0, 180, 0);
+                currentLadderFlipTime = ladderFlipTime;
+            }
+            return;
+        }
+        else if (onLadder == true)
+        {
+            if (CheckLadder(true) != null)
+                animator.SetInteger("StateValue", 5);
+            //print("ok");
+            return;
+        }
+
+        if (Value != 5) 
+            animator.SetInteger("StateValue", Value);
     }
 }
